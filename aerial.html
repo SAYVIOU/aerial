@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aérial — Cinéma & Photographie Aérienne</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ═══ NAV ═══════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">VUE<span>DU</span>CIEL</a>
+  <ul class="nav-links">
+    <li><a href="#showreel">Showreel</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#approche">Approche</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══════════════════════════════════
+  💡 Pour mettre une vidéo de fond :
+     Décommente la balise <video> ci-dessous
+     et remplace "hero.mp4" par ton fichier.
+═══════════════════════════════════════════════ -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="video/video2.MP4" type="video/mp4">
+  </video>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <svg class="hero-drone" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="155" y="115" width="90" height="70" rx="8" fill="#c9a84c"/>
+    <line x1="155" y1="130" x2="80" y2="90" stroke="#c9a84c" stroke-width="8" stroke-linecap="round"/>
+    <line x1="245" y1="130" x2="320" y2="90" stroke="#c9a84c" stroke-width="8" stroke-linecap="round"/>
+    <line x1="155" y1="170" x2="80" y2="210" stroke="#c9a84c" stroke-width="8" stroke-linecap="round"/>
+    <line x1="245" y1="170" x2="320" y2="210" stroke="#c9a84c" stroke-width="8" stroke-linecap="round"/>
+    <ellipse cx="80" cy="85" rx="45" ry="10" fill="#c9a84c" opacity="0.7"/>
+    <ellipse cx="320" cy="85" rx="45" ry="10" fill="#c9a84c" opacity="0.7"/>
+    <ellipse cx="80" cy="215" rx="45" ry="10" fill="#c9a84c" opacity="0.7"/>
+    <ellipse cx="320" cy="215" rx="45" ry="10" fill="#c9a84c" opacity="0.7"/>
+    <circle cx="200" cy="205" r="18" fill="#c9a84c" opacity="0.6"/>
+    <circle cx="200" cy="205" r="10" fill="#080808"/>
+    <circle cx="200" cy="205" r="5" fill="#c9a84c" opacity="0.8"/>
+    <circle cx="80" cy="85" r="5" fill="#fff" opacity="0.9"/>
+    <circle cx="320" cy="85" r="5" fill="#c9a84c" opacity="1"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Pilote & monteur — Cherbourg-en-Cotentin</div>
+    <h1 class="hero-title">
+      Filmer<br>
+      depuis le<br>
+      <em>silence du ciel</em>
+    </h1>
+    <p class="hero-subtitle">
+      Prises de vue aériennes cinématiques et montage vidéo. Un regard depuis les hauteurs pour raconter des histoires autrement.
+    </p>
+    <div class="hero-actions">
+      <a href="#showreel" class="btn-primary"><span>Voir le showreel</span></a>
+      <a href="#portfolio" class="btn-ghost">Explorer le portfolio</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <div class="scroll-label">Découvrir</div>
+  </div>
+</section>
+
+<!-- ═══ SHOWREEL ═══════════════════════════════
+  💡 COMMENT AJOUTER TON SHOWREEL :
+
+  YOUTUBE : Copie l'ID de ta vidéo YouTube
+  (dans l'URL : youtube.com/watch?v=XXXXXXXX)
+  et remplace "VOTRE_ID_ICI" dans le src ci-dessous.
+  Puis supprime le .showreel-placeholder.
+
+  FICHIER LOCAL : Remplace <iframe> par :
+  <video controls class="showreel-player">
+    <source src="showreel.mp4" type="video/mp4">
+  </video>
+═══════════════════════════════════════════════ -->
+<section id="showreel" class="showreel-section">
+  <div class="showreel-inner reveal">
+    <div class="showreel-header">
+      <div>
+        <div class="section-eyebrow">Showreel</div>
+        <h2 class="section-title" style="margin-bottom:0">Le <em>meilleur</em> de mon travail</h2>
+      </div>
+      <div style="font-size:0.65rem; letter-spacing:0.15em; color:var(--muted);">2024 — 2025</div>
+    </div>
+
+    <div class="showreel-embed">
+      <video controls autoplay muted playsinline class="showreel-player">
+        <source src="video/plandrone1.MP4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PORTFOLIO ══════════════════════════════
+  💡 COMMENT AJOUTER TES PHOTOS / VIDÉOS :
+
+  Structure de fichiers recommandée :
+    index.html
+    images/
+      projet-1.jpg
+      projet-2.jpg
+      ...
+    videos/
+      clip-court.mp4
+      ...
+
+  Pour chaque portfolio-item, remplace la div
+  .portfolio-placeholder par :
+  → Photo : <img src="images/fichier.jpg" class="portfolio-thumb" alt="Titre">
+  → Vidéo : <video autoplay muted loop playsinline class="portfolio-thumb">
+               <source src="videos/clip.mp4" type="video/mp4">
+             </video>
+
+  Adapte aussi .portfolio-cat et .portfolio-name
+  avec tes vraies catégories et titres de projets.
+═══════════════════════════════════════════════ -->
+<section id="portfolio" class="portfolio-section">
+  <div class="portfolio-intro reveal">
+    <div class="section-eyebrow">Réalisations</div>
+    <h2 class="section-title">Mes <em>projets</em></h2>
+  </div>
+
+  <div class="portfolio-grid reveal">
+
+    <!-- ITEM 1 — Grand format (château — video1.MP4) -->
+    <div class="portfolio-item large">
+      <video autoplay muted loop playsinline class="portfolio-thumb">
+        <source src="video/video1.MP4" type="video/mp4">
+      </video>
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Cinéma</div>
+        <div class="portfolio-name">Gîte Au fil de l'Orne</div>
+      </div>
+    </div>
+
+    <!-- ITEM 2 — Rivière (video2.MP4) -->
+    <div class="portfolio-item">
+      <video autoplay muted loop playsinline class="portfolio-thumb">
+        <source src="video/video2.MP4" type="video/mp4">
+      </video>
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Paysage</div>
+        <div class="portfolio-name">Rivière normande</div>
+      </div>
+    </div>
+
+    <!-- ITEM 3 — Port (video3.mp4) -->
+    <div class="portfolio-item">
+      <video autoplay muted loop playsinline class="portfolio-thumb">
+        <source src="video/video3.mp4" type="video/mp4">
+      </video>
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Maritime</div>
+        <div class="portfolio-name">Port du Cotentin</div>
+      </div>
+    </div>
+
+    <!-- ITEM 4 — Photo prisedrone.png -->
+    <div class="portfolio-item">
+      <img src="images/prisedrone.png" class="portfolio-thumb" alt="Prise de vue drone — falaises normandes">
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Photographie</div>
+        <div class="portfolio-name">Falaises normandes</div>
+      </div>
+    </div>
+
+    <!-- ITEM 5 — Photo coucher de soleil (⚠️ renomme le fichier en coucher-soleil.png) -->
+    <div class="portfolio-item">
+      <img src="images/coucher-soleil.png" class="portfolio-thumb" alt="Coucher de soleil — vue aérienne">
+      <div class="portfolio-overlay">
+        <div class="portfolio-cat">Photographie</div>
+        <div class="portfolio-name">Coucher de soleil</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ APPROCHE ═══════════════════════════════
+  💡 PHOTO DE TOI / DE TON MATÉRIEL :
+     Remplace le .about-visual-placeholder par :
+     <img src="images/portrait.jpg"
+          style="width:100%; height:100%; object-fit:cover;"
+          alt="Matheo — Aérial">
+═══════════════════════════════════════════════ -->
+<section id="approche" class="about-section reveal">
+  <div class="about-visual">
+    <img src="images/montsaint.jpg" class="about-visual-img" alt="Mont Saint-Michel — Aérial">
+    <div class="about-visual-accent"></div>
+  </div>
+
+  <div class="about-text">
+    <div class="section-eyebrow">Approche</div>
+    <h2 class="section-title">Un regard<br><em>aérien</em></h2>
+
+    <p class="about-body">
+      Je suis <strong>Matheo</strong>, pilote de drone et monteur vidéo basé à
+      <strong>Cherbourg-en-Cotentin</strong>. Ma pratique est avant tout
+      <strong>cinématique</strong> — je ne cherche pas simplement à filmer depuis le ciel,
+      mais à construire une image, un mouvement, une émotion.
+    </p>
+    <p class="about-body">
+      Chaque vol est préparé comme un tournage : choix de la lumière, du tracé,
+      du rythme. Le montage fait partie intégrante de mon travail — c'est là que
+      les images prennent leur sens et leur souffle.
+    </p>
+
+    <!-- Adapte ces tags à ton équipement / style réel -->
+    <div class="about-tags">
+      <span class="about-tag">DJI Mini 3 Pro</span>
+      <span class="about-tag">4K 60fps</span>
+      <span class="about-tag">Final Cut Pro</span>
+      <span class="about-tag">Cinéma aérien</span>
+      <span class="about-tag">Normandie</span>
+      <span class="about-tag">Télépilote certifié DGAC</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ════════════════════════════════
+  💡 Remplace les valeurs par tes vraies infos :
+     - contact@aerial.fr → ton email réel
+     - @aerial → ton compte Instagram réel
+     (tu peux ajouter/supprimer des .contact-link)
+═══════════════════════════════════════════════ -->
+<section id="contact" class="contact-section">
+  <div class="section-eyebrow reveal">Contact</div>
+  <h2 class="contact-title reveal">Une idée ?<br><em>Écris-moi.</em></h2>
+  <p class="contact-sub reveal">
+    Pour tout projet, collaboration ou simple question —<br>
+    je réponds à chaque message.
+  </p>
+
+  <div class="contact-links reveal">
+    <a href="/cdn-cgi/l/email-protection#2645494852474552665053434253454f434a084054" class="contact-link">
+      <div class="contact-link-label">Email</div>
+      <div class="contact-link-value"><span class="__cf_email__" data-cfemail="10737f7e647173645066657574657379757c3e7662">[email&#160;protected]</span></div>
+    </a>
+    <a href="https://instagram.com/aerial" target="_blank" class="contact-link">
+      <div class="contact-link-label">Instagram</div>
+      <div class="contact-link-value">@aerial</div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">VUE<span>DU</span>CIEL</div>
+      <div class="footer-tagline">Cinéma & photographie aérienne — Cherbourg-en-Cotentin</div>
+    </div>
+    <ul class="footer-nav">
+      <li><a href="#showreel">Showreel</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#approche">Approche</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Aérial — Matheo</div>
+    <div class="footer-cert">
+      <div class="cert-badge">DGAC Certifié</div>
+      <div class="cert-badge">Normandie</div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

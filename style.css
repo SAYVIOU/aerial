@@ -1,0 +1,698 @@
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black:      #080808;
+    --deep:       #0d0d0d;
+    --card:       #111111;
+    --gold:       #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim:   #8a6e30;
+    --white:      #f5f0e8;
+    --muted:      #888880;
+    --border:     rgba(201,168,76,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* ─── CURSOR ─────────────────────────────── */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: all 0.18s ease;
+  }
+
+  /* ─── NAV ────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 60px;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex;
+    gap: 44px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── HERO ───────────────────────────────── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /*
+  ═══════════════════════════════════════════
+  💡 VIDÉO DE FOND — Comment l'activer :
+     1. Place ton fichier vidéo dans le même
+        dossier que index.html (ex: hero.mp4)
+     2. Décommente les lignes <video> ci-dessous
+        et remplace "hero.mp4" par ton nom de fichier
+     3. Conseils : vidéo courte (15-25s), format
+        .mp4, résolution 1920×1080 minimum
+  ═══════════════════════════════════════════
+  */
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.38;
+    z-index: 0;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 60%),
+      linear-gradient(to bottom, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.2) 50%, rgba(8,8,8,0.75) 100%);
+    z-index: 1;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    z-index: 1;
+    animation: gridShift 22s linear infinite;
+  }
+  @keyframes gridShift {
+    from { transform: translateY(0); }
+    to   { transform: translateY(80px); }
+  }
+
+  /* Drone SVG (visible si pas de vidéo de fond) */
+  .hero-drone {
+    position: absolute;
+    right: 8%; top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    opacity: 0.10;
+    animation: float 6s ease-in-out infinite;
+    z-index: 1;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(-50%) translateX(0); }
+    50%      { transform: translateY(calc(-50% - 18px)) translateX(8px); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 10%;
+    max-width: 720px;
+  }
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-subtitle {
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    line-height: 2.2;
+    margin-bottom: 52px;
+    max-width: 440px;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+  .btn-primary {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: 0;
+  }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary:hover { color: var(--black); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-ghost {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
+  }
+  .btn-ghost::after { content: '↓'; transition: transform 0.3s; }
+  .btn-ghost:hover { color: var(--gold); }
+  .btn-ghost:hover::after { transform: translateY(4px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 1.3s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollAnim 2s ease-in-out infinite;
+  }
+  @keyframes scrollAnim {
+    0%,100% { opacity: 0.6; transform: scaleY(1); }
+    50%      { opacity: 1;   transform: scaleY(0.6); }
+  }
+  .scroll-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── SECTIONS COMMUNES ──────────────────── */
+  section { padding: 120px 10%; }
+
+  .section-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 60px;
+  }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+
+  /* ─── SHOWREEL ───────────────────────────── */
+  .showreel-section {
+    padding: 0;
+    position: relative;
+    background: var(--deep);
+  }
+
+  .showreel-inner {
+    padding: 100px 10%;
+  }
+
+  .showreel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+  }
+
+  /*
+  ═══════════════════════════════════════════
+  💡 SHOWREEL VIDÉO — Options :
+
+  OPTION A — YouTube / Vimeo (recommandé) :
+    Remplace l'attribut "src" de l'iframe par
+    ton lien YouTube au format :
+    https://www.youtube.com/embed/TON_ID_VIDEO?autoplay=0&rel=0
+    (ton ID vidéo = les caractères après "?v=" dans l'URL YouTube)
+
+  OPTION B — Fichier local :
+    Remplace <iframe> par :
+    <video controls class="showreel-player">
+      <source src="showreel.mp4" type="video/mp4">
+    </video>
+  ═══════════════════════════════════════════
+  */
+  .showreel-embed {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* ratio 16:9 */
+    background: var(--card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .showreel-embed iframe,
+  .showreel-embed video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  /* Placeholder tant qu'aucune vidéo n'est ajoutée */
+  .showreel-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: var(--card);
+  }
+  .showreel-placeholder-icon {
+    font-size: 3rem;
+    opacity: 0.4;
+  }
+  .showreel-placeholder-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .showreel-player {
+    width: 100%;
+    display: block;
+  }
+
+  /* ─── PORTFOLIO ──────────────────────────── */
+  .portfolio-section {
+    background: var(--black);
+    padding-top: 0;
+  }
+
+  .portfolio-intro {
+    padding: 100px 10% 60px;
+  }
+
+  /*
+  ═══════════════════════════════════════════
+  💡 GRILLE PORTFOLIO — Comment ajouter des images :
+
+  1. Crée un dossier "images/" dans le même
+     répertoire que index.html
+  2. Place tes photos dedans (format .jpg ou .webp)
+  3. Dans chaque .portfolio-item, remplace
+     <div class="portfolio-placeholder ...">
+     par :
+     <img src="images/NOM_FICHIER.jpg"
+          class="portfolio-thumb" alt="Description">
+
+  Pour les vidéos dans la grille :
+     <video autoplay muted loop playsinline
+            class="portfolio-thumb">
+       <source src="videos/clip.mp4" type="video/mp4">
+     </video>
+  ═══════════════════════════════════════════
+  */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 3px;
+    padding: 0 10% 100px;
+  }
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-item.large { grid-row: span 2; }
+
+  .portfolio-thumb {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s ease;
+  }
+  .portfolio-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: transform 0.7s ease;
+  }
+  .portfolio-placeholder-icon { font-size: 2rem; opacity: 0.25; }
+  .portfolio-placeholder-hint {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.5;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  /* Couleurs de fond des placeholders */
+  .p1 { background: linear-gradient(145deg, #18160e, #2a2212); }
+  .p2 { background: linear-gradient(145deg, #0e1618, #121e20); }
+  .p3 { background: linear-gradient(145deg, #160e18, #1e1220); }
+  .p4 { background: linear-gradient(145deg, #0e1014, #12141a); }
+  .p5 { background: linear-gradient(145deg, #141610, #181a12); }
+
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.88) 0%, rgba(8,8,8,0.2) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+  .portfolio-item:hover .portfolio-thumb,
+  .portfolio-item:hover .portfolio-placeholder { transform: scale(1.05); }
+
+  .portfolio-cat {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .portfolio-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  /* ─── APPROCHE ───────────────────────────── */
+  .about-section {
+    background: var(--deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  /*
+  ═══════════════════════════════════════════
+  💡 PHOTO DE TOI / PHOTO DRONE — À ajouter :
+     Remplace le .about-visual-placeholder par :
+     <img src="images/portrait.jpg"
+          class="about-visual-img" alt="Matheo, pilote Aérial">
+
+     Style suggéré :
+     .about-visual-img {
+       width: 100%; height: 500px;
+       object-fit: cover;
+       border: 1px solid var(--border);
+     }
+  ═══════════════════════════════════════════
+  */
+  .about-visual {
+    position: relative;
+  }
+  .about-visual-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border: 1px solid var(--border);
+  }
+  .about-visual-accent {
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 180px; height: 180px;
+    border: 1px solid var(--border);
+    z-index: -1;
+  }
+
+  .about-text { }
+  .about-body {
+    font-size: 0.82rem;
+    line-height: 2.2;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+  .about-body strong {
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 36px;
+  }
+  .about-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+  }
+
+  /* ─── CONTACT SIMPLIFIÉ ──────────────────── */
+  .contact-section {
+    text-align: center;
+    padding: 120px 10%;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-section::before {
+    content: '✦';
+    font-size: 22rem;
+    color: rgba(201,168,76,0.03);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    line-height: 1;
+    pointer-events: none;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-title em { font-style: italic; color: var(--gold-light); }
+  .contact-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    line-height: 2;
+    margin-bottom: 60px;
+    position: relative; z-index: 1;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 36px 48px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+    min-width: 220px;
+  }
+  .contact-link:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+  .contact-link-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .contact-link-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+  }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 50px 10% 36px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline {
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-top: 6px;
+  }
+  .footer-nav {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .footer-nav a {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-nav a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .footer-cert {
+    display: flex;
+    gap: 16px;
+  }
+  .cert-badge {
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+  }
+
+  /* ─── REVEAL ─────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 6%; }
+    .about-section { grid-template-columns: 1fr; gap: 48px; padding: 80px 6%; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; padding: 0 6% 80px; }
+    .portfolio-item.large { grid-row: span 1; }
+    .portfolio-item { height: 220px; }
+    .footer-top { flex-direction: column; gap: 28px; text-align: center; }
+    .footer-nav { justify-content: center; }
+  }
